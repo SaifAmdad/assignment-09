@@ -9,7 +9,7 @@ function Navlink({ href, route }) {
     <>
       <Link
         href={href}
-        className={`text-[16px] font-bold hover:text-indigo-600 ${href == pathName ? "text-indigo-500 underline" : ""}`}
+        className={`text-[16px] font-semibold hover:text-indigo-600 ${href == pathName ? "text-indigo-500 underline" : ""}`}
       >
         {route}
       </Link>
