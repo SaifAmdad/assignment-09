@@ -1,0 +1,13 @@
+{
+  "name": "Anisul Islam",
+  "photoUrl": "https://pbs.twimg.com/profile_images/1313143643398721537/29J0U2P__400x400.jpg",
+  "subject": "Programming",
+  "availableDate": "Sun-Fri",
+  "feePerHour": 200,
+  "totalSlot": 3,
+  "sessionStart": "12-03-2026",
+  "institution": "Tempare University, Finland",
+  "location": "Finland",
+  "teachingMode": ["Online", "Youtube", "Udemy"],
+  "rating": 4.5
+}

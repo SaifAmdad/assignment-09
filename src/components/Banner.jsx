@@ -36,7 +36,7 @@ function Banner() {
         slidesPerView={1}
         navigation={true}
         pagination={{ clickable: true }}
-        // autoplay={true}
+        autoplay={true}
       >
         <SwiperSlide>
           <div className="container mx-auto lg:w-[75%] pt-16">

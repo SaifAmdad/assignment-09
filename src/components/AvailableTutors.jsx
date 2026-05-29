@@ -1,8 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import TutorCard from "./shared/TutorCard";
+import data from "../../public/data.json";
 
-const AvailableTutors = () => {
+const AvailableTutors = async () => {
   return (
     <div className="container mx-auto lg:w-[75%] py-16">
       <div className="flex justify-between items-center">
@@ -13,6 +15,10 @@ const AvailableTutors = () => {
         >
           View All <IoIosArrowForward />
         </Link>
+      </div>
+
+      <div>
+        <TutorCard data={data} />
       </div>
     </div>
   );
