@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import TutorCard from "./shared/TutorCard";
-import data from "../../public/data.json";
+import datas from "../../public/data.json";
 
 const AvailableTutors = async () => {
   return (
@@ -17,8 +17,10 @@ const AvailableTutors = async () => {
         </Link>
       </div>
 
-      <div>
-        <TutorCard data={data} />
+      <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {datas.map((data, i) => (
+          <TutorCard data={data} key={i} />
+        ))}
       </div>
     </div>
   );

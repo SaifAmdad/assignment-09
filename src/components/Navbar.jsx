@@ -24,7 +24,7 @@ function Navbar() {
         <Navlink href={"/my-tutors"} route={"My Tutors"} />
       </li>
       <li>
-        <Navlink href={"/my-bookings"} route={"My Bookings"} />
+        <Navlink href={"/my-booked-session"} route={"My Booked Session"} />
       </li>
     </>
   );
@@ -55,6 +55,7 @@ function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {navlinks}
+              {logedinNavlinks}
             </ul>
           </div>
           <Link href={"/"} className="font-bold text-xl flex gap-0">
@@ -63,7 +64,9 @@ function Navbar() {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navlinks}</ul>
+          <ul className="menu menu-horizontal px-1">
+            {navlinks} {logedinNavlinks}
+          </ul>
         </div>
         <div className="navbar-end">
           <ThemeButton />
