@@ -57,10 +57,7 @@ function Navbar() {
               {navlinks}
             </ul>
           </div>
-          <Link
-            href={"/"}
-            className="btn btn-ghost font-bold text-xl flex gap-0"
-          >
+          <Link href={"/"} className="font-bold text-xl flex gap-0">
             <span>Tutor</span>
             <span className="text-indigo-500">Hub</span>
           </Link>

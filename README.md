@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Server](https://saifamdadassignment-09-server.vercel.app/) [Client](https://saifamdad-assignment-09.vercel.app/).
 
 ## Getting Started
 
