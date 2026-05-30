@@ -163,10 +163,7 @@ const AddTutor = () => {
           </div>
         </div>
         <button className="btn bg-indigo-600 text-white mt-4" type="submit">
-          Login
-        </button>
-        <button className="btn btn-ghost mt-1" type="reset">
-          Reset
+          Add Tutor
         </button>
       </form>
     </>
