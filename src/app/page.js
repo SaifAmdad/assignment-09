@@ -1,13 +1,13 @@
 import AvailableTutors from "@/components/AvailableTutors";
 import Banner from "@/components/Banner";
-import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import ExtraSection from "@/components/ExtraSection";
 
 export default function Home() {
   return (
     <>
       <Banner />
       <AvailableTutors />
+      <ExtraSection />
     </>
   );
 }
