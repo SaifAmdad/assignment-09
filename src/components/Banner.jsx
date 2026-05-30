@@ -18,17 +18,6 @@ import Link from "next/link";
 function Banner() {
   return (
     <div className="bg-[url('/banner.png')] h-fit lg:h-[60vh] bg-no-repeat bg-cover bg-center relative">
-      {/* <div className="container mx-auto lg:w-[75%]">
-        <h1 className="text-white font-bold text-5xl leading-14">
-          Find the Perfect Tutor <br /> Achieve{" "}
-          <span className="text-indigo-500">Your Goals</span>
-        </h1>
-        <p className="text-gray-300 py-9 leading-7">
-          Connect with certified expert tutors for 1-on-1 personalized lessons,{" "}
-          <br />
-          tailored to your pace and goals.
-        </p>
-      </div> */}
       <Swiper
         className="h-full"
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -39,15 +28,14 @@ function Banner() {
         autoplay={true}
       >
         <SwiperSlide>
-          <div className="container mx-auto lg:w-[75%] pt-16">
-            <h1 className="text-white font-bold text-5xl leading-14">
-              Find the Perfect Tutor <br /> Achieve{" "}
+          <div className="container mx-auto lg:w-[75%] pt-16 pb-16 lg:pb-0">
+            <h1 className="text-white font-bold text-5xl leading-14 max-w-2xl">
+              Find the Perfect Tutor Achieve{" "}
               <span className="text-indigo-500">Your Goals</span>
             </h1>
-            <p className="text-gray-300 py-7 leading-7">
+            <p className="text-gray-300 py-7 leading-7 max-w-2xl">
               Connect with certified expert tutors for 1-on-1 personalized
-              lessons, <br />
-              tailored to your pace and goals.
+              lessons, tailored to your pace and goals.
             </p>
             <Link
               href={"/tutors"}
@@ -59,15 +47,14 @@ function Banner() {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="container mx-auto lg:w-[75%] pt-16">
-            <h1 className="text-white font-bold text-5xl leading-14">
-              Turn Your Expertise Into Income. <br /> Teach on
+          <div className="container mx-auto lg:w-[75%] pt-16 pb-16 lg:pb-0">
+            <h1 className="text-white font-bold text-5xl leading-14 max-w-2xl">
+              Turn Your Expertise Into Income. Teach on
               <span className="text-indigo-500"> TutorHub</span>
             </h1>
-            <p className="text-gray-300 py-7 leading-7">
+            <p className="text-gray-300 py-7 leading-7 max-w-2xl">
               Inspire the next generation. Set your own rates, manage your own
-              schedule,
-              <br /> and teach from anywhere in the world.
+              schedule, and teach from anywhere in the world.
             </p>
             <Link
               href={"/tutors"}
@@ -79,14 +66,14 @@ function Banner() {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className="container mx-auto lg:w-[75%] pt-16">
-            <h1 className="text-white font-bold text-5xl leading-14">
+          <div className="container mx-auto lg:w-[75%] pt-16 pb-16 lg:pb-0">
+            <h1 className="text-white font-bold text-5xl leading-14 max-w-2xl">
               Your <span className="text-indigo-500">Academic Goals</span>,{" "}
-              <br /> Matched Perfectly
+              Matched Perfectly
             </h1>
-            <p className="text-gray-300 py-7 leading-7">
+            <p className="text-gray-300 py-7 leading-7 max-w-2xl">
               From school curriculum to advanced tech skills, get verified help
-              <br /> when you need it most. No long-term commitments
+              when you need it most. No long-term commitments
             </p>
             <Link
               href={"/tutors"}

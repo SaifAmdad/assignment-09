@@ -18,9 +18,11 @@ const AvailableTutors = async () => {
       </div>
 
       <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 place-items-stretch">
-        {datas.map((data, i) => (
-          <TutorCard data={data} key={i} />
-        ))}
+        {datas.map((data, i) => {
+          if (i >= 6) return;
+
+          return <TutorCard data={data} key={i} />;
+        })}
       </div>
     </div>
   );

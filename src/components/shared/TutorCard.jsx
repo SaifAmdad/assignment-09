@@ -5,7 +5,7 @@ import { TbCurrencyTaka } from "react-icons/tb";
 
 const TutorCard = ({ data }) => {
   return (
-    <div className="card bg-base-200 max-w-90 shadow-sm mx-auto">
+    <div className="card bg-base-200 max-w-90 shadow-sm mx-auto sm:mx-0">
       <figure>
         <Image
           height={200}
