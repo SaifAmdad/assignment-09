@@ -70,6 +70,12 @@ function Navbar() {
         </div>
         <div className="navbar-end">
           <ThemeButton />
+          <Link
+            href={"/login"}
+            className="btn bg-indigo-600 text-white ml-3 px-7"
+          >
+            Login
+          </Link>
         </div>
       </div>
     </div>
