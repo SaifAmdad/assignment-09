@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { FaPhoneAlt, FaWhatsappSquare } from "react-icons/fa";
-import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa6";
+import { FaFacebook, FaTwitter, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
 import { MdOutlineMail } from "react-icons/md";
 
@@ -66,7 +66,7 @@ const Footer = () => {
           <div className="flex gap-3 py-3">
             <FaFacebook fill="blue" size={25} />
             <FaYoutube fill="red" size={25} />
-            <FaTwitter fill="#3399ff" size={25} />
+            <FaXTwitter fill="#3399ff" size={25} />
             <FaWhatsappSquare fill="green" size={25} />
           </div>
         </div>
