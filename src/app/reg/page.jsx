@@ -1,10 +1,26 @@
+"use client";
+
+import SigninGoogle from "@/components/clients/SigninGoogle";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React from "react";
 
 function RegisterPage() {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const { data, error } = await authClient.signUp.email({
+      name: e.target.name.value, // required
+      email: e.target.email.value, // required
+      password: e.target.password.value, // required
+      image: e.target.image.value,
+      // callbackURL: "/",
+    });
+
+    console.log(data, error);
+  };
   return (
     <div className="container mx-auto sm:w-100 sm:min-h-[60vh] py-10">
-      <form>
+      <form onSubmit={onSubmit}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border px-5 pb-10">
           <legend className="fieldset-legend text-sm text-indigo-600">
             Register
@@ -60,6 +76,14 @@ function RegisterPage() {
               Login
             </Link>
           </p>
+
+          <div className="flex items-center justify-between pt-1">
+            <hr className="border border-indigo-600 w-[46%] " />
+            <p>OR</p>
+            <hr className="border border-indigo-600 w-[46%] " />
+          </div>
+
+          <SigninGoogle />
         </fieldset>
       </form>
     </div>
