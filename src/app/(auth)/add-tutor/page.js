@@ -8,9 +8,12 @@ export const metadata = {
 };
 
 const AddTutorPage = async () => {
-  const token = await auth.api.getToken({
-    headers: await headers(),
+  const h = new Headers(await headers());
+  const { token } = await auth.api.getToken({
+    headers: h,
   });
+
+  console.log(token);
 
   return (
     <div className="container mx-auto md:w-190 pb-10 ">
