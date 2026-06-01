@@ -1,22 +1,29 @@
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { baseUrl, mongodbUrl } from "@/secret";
 import { jwt } from "better-auth/plugins";
 
-const client = new MongoClient(mongodbUrl);
+const mUrl = process.env.MONGODB_URL;
+
+if (!mUrl) {
+  throw new Error(
+    "Please define the MONGODB_URI environment variable inside Vercel/Local settings",
+  );
+}
+
+const client = new MongoClient(process.env.MONGODB_URL);
 const db = client.db();
 
 export const auth = betterAuth({
-  baseURL: baseUrl,
-  database: mongodbAdapter(db, {
-    // Optional: if you don't provide a client, database transactions won't be enabled.
-    client,
-  }),
+  baseURL: process.env.BETTER_AUTH_URL,
+
+  trustHost: true,
+
   account: {
     accountLinking: {
       enabled: true,
-      trustedProviders: ["google"], // Add your providers
+      trustedProviders: ["google"],
+      autoLink: true,
     },
   },
   emailAndPassword: {
@@ -37,5 +44,8 @@ export const auth = betterAuth({
       maxAge: 15 * 24 * 60 * 60,
     },
   },
+  database: mongodbAdapter(db, {
+    client,
+  }),
   plugins: [jwt()],
 });

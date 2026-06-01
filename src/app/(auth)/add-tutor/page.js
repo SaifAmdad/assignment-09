@@ -2,8 +2,6 @@ import AddTutor from "@/components/AddTutor";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-export const runtime = "nodejs";
-
 export const metadata = {
   title: "Add new Tutor | TutorHub",
   description: "Route not found",
@@ -11,7 +9,7 @@ export const metadata = {
 
 const AddTutorPage = async () => {
   const h = new Headers(await headers());
-  const { token } = await auth.api.getToken({
+  const { token } = await auth.api?.getToken({
     headers: h,
   });
 

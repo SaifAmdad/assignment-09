@@ -20,9 +20,9 @@ function RegisterPage() {
   };
   return (
     <div className="container mx-auto sm:w-100 sm:min-h-[60vh] py-10 ">
-      <div className="bg-base-200 border-base-100 px-5 pb-10">
+      <div className="bg-base-200 border-base-100">
         <form onSubmit={onSubmit}>
-          <fieldset className="fieldset  rounded-box  ">
+          <fieldset className="fieldset px-5 border-2 border-base-300 border-b-0 rounded-box  ">
             <legend className="fieldset-legend text-sm text-indigo-600">
               Register
             </legend>

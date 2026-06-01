@@ -1,10 +1,13 @@
+"use client";
 import React from "react";
 import Navlink from "./shared/Navlink";
 import Link from "next/link";
-import Image from "next/image";
 import ThemeButton from "./clients/ThemeButton";
-
+import { authClient } from "@/lib/auth-client";
 function Navbar() {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log(user);
   const navlinks = (
     <>
       <li>
@@ -18,13 +21,25 @@ function Navbar() {
   const logedinNavlinks = (
     <>
       <li>
-        <Navlink href={"/add-tutor"} route={"Add Tutor"} />
+        <Navlink
+          href={"/add-tutor"}
+          route={"Add Tutor"}
+          logedin={`${user ? true : false}`}
+        />
       </li>
       <li>
-        <Navlink href={"/my-tutors"} route={"My Tutors"} />
+        <Navlink
+          href={"/my-tutors"}
+          route={"My Tutors"}
+          logedin={`${user ? true : false}`}
+        />
       </li>
       <li>
-        <Navlink href={"/my-booked-session"} route={"My Booked Session"} />
+        <Navlink
+          href={"/my-booked-session"}
+          route={"My Booked Session"}
+          logedin={`${user ? true : false}`}
+        />
       </li>
     </>
   );
@@ -55,7 +70,8 @@ function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {navlinks}
-              {logedinNavlinks}
+              {user ? logedinNavlinks : ""}
+              {/* {logedinNavlinks} */}
             </ul>
           </div>
           <Link href={"/"} className="font-bold text-xl flex gap-0">
@@ -65,7 +81,9 @@ function Navbar() {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {navlinks} {logedinNavlinks}
+            {navlinks}
+            {user ? logedinNavlinks : ""}
+            {/* {logedinNavlinks} */}
           </ul>
         </div>
         <div className="navbar-end">

@@ -1,9 +1,5 @@
 "use client";
 
-// import { useState } from "react";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-
 const AddTutor = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -105,12 +101,6 @@ const AddTutor = () => {
                 required
                 name="sessionStart"
               />
-              {/* <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            showIcon
-            dateFormat="dd/MM/yyyy"
-          /> */}
             </label>
 
             <label className="fieldset">
