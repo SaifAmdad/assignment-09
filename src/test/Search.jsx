@@ -21,11 +21,11 @@ function Search() {
       <div className=" flex items-center justify-center py-3">
         <input
           onChange={onChange}
-          type="text"
-          placeholder="Type Tile Title"
-          className="border border-[#0E6F75] p-1.5 w-[80%] rounded-bl-xl rounded-tl-xl"
+          type="search"
+          placeholder="Search by Tutor Name or Subject"
+          className="border border-indigo-600 p-1.5 w-[80%] rounded-bl-xl rounded-tl-xl"
         />{" "}
-        <button className="btn bg-[#0E6F75] text-white rounded-br-xl rounded-tr-xl">
+        <button className="btn bg-indigo-600 text-white rounded-br-xl rounded-tr-xl">
           Search
         </button>
       </div>

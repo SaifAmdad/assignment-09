@@ -1,5 +1,4 @@
 import MySession from "@/components/MySession";
-import React from "react";
 
 const MyBookedSession = () => {
   return (
