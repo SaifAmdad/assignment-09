@@ -8,10 +8,10 @@ function SigninGoogle() {
     const data = await authClient.signIn.social({
       provider: "google",
 
-      //     idToken: {
-      //     token: '',
-      //     accessToken: ''
-      // }
+      // idToken: {
+      //   token: process.env.GOOGLE_CLIENT_ID,
+      //   accessToken: process.env.GOOGLE_CLIENT_SECRET,
+      // },
     });
 
     // if (!data?.error) {
