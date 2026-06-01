@@ -2,6 +2,8 @@ import AddTutor from "@/components/AddTutor";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
+export const runtime = "nodejs";
+
 export const metadata = {
   title: "Add new Tutor | TutorHub",
   description: "Route not found",
