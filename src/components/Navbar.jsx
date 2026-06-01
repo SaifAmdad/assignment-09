@@ -4,6 +4,7 @@ import Navlink from "./shared/Navlink";
 import Link from "next/link";
 import ThemeButton from "./clients/ThemeButton";
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -88,12 +89,23 @@ function Navbar() {
         </div>
         <div className="navbar-end">
           <ThemeButton />
-          <Link
-            href={"/login"}
-            className="btn bg-indigo-600 text-white ml-3 px-7"
-          >
-            Login
-          </Link>
+
+          {user ? (
+            <Image
+              src={user.image}
+              height={100}
+              width={100}
+              alt="Profile"
+              className="ml-3 h-10 w-10 rounded-full"
+            />
+          ) : (
+            <Link
+              href={"/login"}
+              className="btn bg-indigo-600 text-white ml-3 px-7"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>
