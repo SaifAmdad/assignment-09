@@ -1,9 +1,15 @@
 import MyTutors from "@/components/MyTutors";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
 import { FaPlus } from "react-icons/fa6";
 
-const MyTutorsPage = () => {
+const MyTutorsPage = async () => {
+  const h = new Headers(await headers());
+  const { token } = await auth.api.getToken({
+    headers: h,
+  });
   return (
     <div className="container mx-auto md:w-[75%] pb-10 ">
       <div className="py-6 flex justify-between items-center">
@@ -17,7 +23,7 @@ const MyTutorsPage = () => {
           <FaPlus /> Add New Tutor{" "}
         </Link>
       </div>
-      <MyTutors />
+      <MyTutors token={token} />
     </div>
   );
 };

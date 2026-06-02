@@ -18,11 +18,7 @@ const TutorCard = ({ data }) => {
       <div className="">
         <h2 className="card-title pt-2">{data.tutorName}</h2>
         <p className="text-indigo-500 font-medium">{data.subject}</p>
-        <p className="py-1 font-normal text-sm">
-          {data.teachingMode.map((mode, i) => (
-            <span key={i}>{mode}, </span>
-          ))}
-        </p>
+        <p className="py-1 font-normal text-sm">{data.teachingMode}</p>
         <p className=" font-medium flex justify-start items-center gap-0">
           <TbCurrencyTaka />{" "}
           <span className="font-bold">{data.feePerHour}</span>
@@ -30,7 +26,7 @@ const TutorCard = ({ data }) => {
         </p>
         <div className="card-actions pt-3">
           <Link
-            href={`/tutors/${data._id}`}
+            href={`/tutor/${data._id}`}
             className="btn bg-indigo-600 text-white w-full"
           >
             Book Session

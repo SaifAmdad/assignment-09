@@ -1,10 +1,21 @@
+import { auth } from "@/lib/auth";
+import { serverUrl } from "@/secret";
+import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
 import { BiDetail } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const MyTutors = () => {
+const MyTutors = async ({ token }) => {
+  const res = await fetch(`${serverUrl}/my-tutors`, {
+    method: "GET",
+    headers: {
+      auth: token,
+    },
+  });
+  const { tutors } = await res.json();
+
   return (
     <div>
       <div className="overflow-x-auto bg-base-200">
@@ -19,6 +30,38 @@ const MyTutors = () => {
           </thead>
           <tbody>
             {/* row 1 */}
+            {tutors.map((tutor, i) => (
+              <tr key={i}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle h-12 w-12">
+                        <Image
+                          src={tutor.photoUrl}
+                          alt="Avatar Tailwind CSS Component"
+                          height={100}
+                          width={100}
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-[16px]">
+                        {tutor.tutorName}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>{tutor.subject}</td>
+                <td>{tutor.totalSlot - tutor.bookedSlot}</td>
+                <th>
+                  <div className="flex gap-3 justify-center">
+                    <BiDetail color="#6366F1" size={22} />
+                    <FiEdit color="green" size={20} />
+                    <RiDeleteBin6Line color="red" size={20} />
+                  </div>
+                </th>
+              </tr>
+            ))}
             <tr>
               <td>
                 <div className="flex items-center gap-3">
@@ -45,29 +88,6 @@ const MyTutors = () => {
                   <FiEdit color="green" size={20} />
                   <RiDeleteBin6Line color="red" size={20} />
                 </div>
-              </th>
-            </tr>
-            {/* row 2 */}
-            <tr>
-              <td>
-                <div className="flex items-center gap-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img
-                        src="https://img.daisyui.com/images/profile/demo/3@94.webp"
-                        alt="Avatar Tailwind CSS Component"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">Brice Swyre</div>
-                  </div>
-                </div>
-              </td>
-              <td>Carroll Group</td>
-              <td>Red</td>
-              <th>
-                <button className="btn btn-ghost btn-xs">details</button>
               </th>
             </tr>
           </tbody>

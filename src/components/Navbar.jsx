@@ -8,7 +8,7 @@ import Image from "next/image";
 function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user);
+
   const navlinks = (
     <>
       <li>

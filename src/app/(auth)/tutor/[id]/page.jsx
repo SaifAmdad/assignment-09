@@ -1,27 +1,43 @@
 import { ModalBooking } from "@/components/clients/ModalBooking";
+import { auth } from "@/lib/auth";
+import { serverUrl } from "@/secret";
+import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 
-const TutorDetailsPage = async ({ params }) => {
-  const { id } = await params;
+// export async function generateMetadata({ params }, parent) {
+//   // read route params
+//   const { id } = await params;
 
-  const data = {
-    _id: "001",
-    tutorName: "Anisul Islam",
-    photoUrl:
-      "https://pbs.twimg.com/profile_images/1313143643398721537/29J0U2P__400x400.jpg",
-    subject: "Programming",
-    availableDate: "Sun-Fri",
-    feePerHour: 200,
-    totalSlot: 3,
-    sessionStart: "12-03-2026",
-    institution: "Tempare University, Finland",
-    location: "Finland",
-    teachingMode: "Online",
-    experience: 3,
-    rating: 4.5,
-  };
+//   // fetch data
+//   const product = await fetch(`https://.../${id}`).then((res) => res.json());
+
+//   // optionally access and extend (rather than replace) parent metadata
+//   const previousImages = (await parent).openGraph?.images || [];
+
+//   return {
+//     title: product.title,
+//     openGraph: {
+//       images: ["/some-specific-page-image.jpg", ...previousImages],
+//     },
+//   };
+// }
+
+const TutorDetailsPage = async ({ params }) => {
+  const h = new Headers(await headers());
+  const { token } = await auth.api.getToken({
+    headers: h,
+  });
+  const { id } = await params;
+  const res = await fetch(`${serverUrl}/get-tutor/${id}`, {
+    method: "GET",
+    headers: {
+      auth: token,
+    },
+  });
+  const { tutor: data } = await res.json();
+
   return (
     <div className="container mx-auto lg:w-[75%] sm:px-10 py-10 bg-base-200 my-10 shadow-sm rounded-2xl flex flex-col items-center">
       <div className="w-full sm:w-xl flex flex-col justify-center items-center sm:items-start sm:justify-start sm:flex-row gap-10">
@@ -78,22 +94,35 @@ const TutorDetailsPage = async ({ params }) => {
             </tr>
             {/* row 4 */}
             <tr>
-              <td className="font-bold text-sm">Available Date $ Slot</td>
-              <td>{data.availableDate}</td>
+              <td className="font-bold text-sm">Available Date & Time</td>
+              <td>{data.availableDateTime}</td>
             </tr>
             {/* row 5 */}
             <tr>
               <td className="font-bold">Total Slot </td>
-              <td>{data.totalSlot}</td>
+              <td>{data.totalSlot - data.bookedSlot} </td>
             </tr>
+
             {/* row 6 */}
+            <tr>
+              <td className="font-bold">Available Slot </td>
+              <td className="font-bold text-indigo-600">
+                {data.totalSlot - data.bookedSlot}{" "}
+              </td>
+            </tr>
             <tr>
               <td className="font-bold">Session Start </td>
               <td>{data.sessionStart}</td>
             </tr>
           </tbody>
         </table>
-        <ModalBooking id={data._id} name={data.name} />
+        <ModalBooking
+          id={data._id}
+          name={data.tutorName}
+          // slot={0}
+          slot={data.totalSlot - data.bookedSlot}
+          token={token}
+        />
       </div>
     </div>
   );

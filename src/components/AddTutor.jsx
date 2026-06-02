@@ -1,12 +1,28 @@
 "use client";
 
-const AddTutor = () => {
+import { authClient } from "@/lib/auth-client";
+import { serverUrl } from "@/secret";
+
+const AddTutor = ({ token }) => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(e.target.tutorName.value);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
+    data.userId = user.id;
+
+    const newTutor = await fetch(`${serverUrl}/add-tutor`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        auth: token,
+        userId: user.id,
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(newTutor);
   };
 
   return (

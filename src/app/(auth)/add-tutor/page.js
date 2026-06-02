@@ -9,11 +9,9 @@ export const metadata = {
 
 const AddTutorPage = async () => {
   const h = new Headers(await headers());
-  const { token } = await auth.api?.getToken({
+  const { token } = await auth.api.getToken({
     headers: h,
   });
-
-  console.log(token);
 
   return (
     <div className="container mx-auto md:w-190 pb-10 ">
@@ -21,7 +19,7 @@ const AddTutorPage = async () => {
         <h1 className="font-bold text-2xl py-2"> Add Tutor</h1>
         <p className="text-base opacity-70">Create a new tutor profile</p>
       </div>
-      <AddTutor />
+      <AddTutor token={token} />
     </div>
   );
 };
