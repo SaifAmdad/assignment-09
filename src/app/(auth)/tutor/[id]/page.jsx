@@ -100,7 +100,7 @@ const TutorDetailsPage = async ({ params }) => {
             {/* row 5 */}
             <tr>
               <td className="font-bold">Total Slot </td>
-              <td>{data.totalSlot - data.bookedSlot} </td>
+              <td>{data.totalSlot} </td>
             </tr>
 
             {/* row 6 */}

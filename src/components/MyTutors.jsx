@@ -8,15 +8,12 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const MyTutors = async ({ token }) => {
-  const res = await fetch(
-    `https://assignment-09-server.onrender.com/my-tutors`,
-    {
-      method: "GET",
-      headers: {
-        auth: token,
-      },
+  const res = await fetch(`${serverUrl}/my-tutors`, {
+    method: "GET",
+    headers: {
+      auth: token,
     },
-  );
+  });
   const { tutors } = await res.json();
 
   return (

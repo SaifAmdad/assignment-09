@@ -18,17 +18,14 @@ export function ModalBooking({ name, slot, id, token }) {
     data.userId = user?.id;
     setLoading(true);
 
-    const res = await fetch(
-      `https://assignment-09-server.onrender.com/add-booking`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          auth: token,
-        },
-        body: JSON.stringify(data),
+    const res = await fetch(`http://localhost:26323/add-booking`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        auth: token,
       },
-    );
+      body: JSON.stringify(data),
+    });
     if (res.ok) {
       redirect("/my-booked-session");
     }

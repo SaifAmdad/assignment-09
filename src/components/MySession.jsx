@@ -1,15 +1,13 @@
-import { MdOutlineCancel } from "react-icons/md";
+import { serverUrl } from "@/secret";
+import CancelBooking from "./clients/CancelBooking";
 
 const MySession = async ({ token }) => {
-  const res = await fetch(
-    `https://assignment-09-server.onrender.com/get-booking`,
-    {
-      method: "GET",
-      headers: {
-        auth: token,
-      },
+  const res = await fetch(`${serverUrl}/get-booking`, {
+    method: "GET",
+    headers: {
+      auth: token,
     },
-  );
+  });
   const { booking } = await res.json();
   if (!booking) {
     return console.log("Nothing");
@@ -52,12 +50,7 @@ const MySession = async ({ token }) => {
                     </span>
                   </td>
                   <th className="flex justify-center">
-                    <button
-                      className={`${booked.status !== "Active" ? "btn-disabled bg-red-300" : "bg-red-600"} btn  text-white`}
-                    >
-                      Cancel
-                      <MdOutlineCancel color="white" size={15} />
-                    </button>
+                    <CancelBooking booked={booked} token={token} />
                   </th>
                 </tr>
               ))}
