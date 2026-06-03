@@ -1,29 +1,34 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { serverUrl } from "@/secret";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 import { BsBookmarkCheck } from "react-icons/bs";
 
 export function ModalBooking({ name, slot, id, token }) {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     data.userId = user?.id;
+    setLoading(true);
 
-    const res = await fetch(`http://localhost:26323/add-booking`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        auth: token,
+    const res = await fetch(
+      `https://assignment-09-server.onrender.com/add-booking`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          auth: token,
+        },
+        body: JSON.stringify(data),
       },
-      body: JSON.stringify(data),
-    });
+    );
     if (res.ok) {
       redirect("/my-booked-session");
     }
@@ -113,7 +118,11 @@ export function ModalBooking({ name, slot, id, token }) {
                     className="bg-indigo-600 w-full my-5"
                     type="submit"
                   >
-                    Book Now
+                    {loading ? (
+                      <span className="loading loading-spinner loading-sm "></span>
+                    ) : (
+                      "Book Now"
+                    )}
                   </Button>
                 </form>
               </Surface>
