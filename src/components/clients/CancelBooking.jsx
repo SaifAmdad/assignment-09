@@ -1,4 +1,5 @@
 "use client";
+import { serverUrl } from "@/secret";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -9,15 +10,12 @@ const CancelBooking = ({ booked, token }) => {
   const onCancell = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await fetch(
-      `http://localhost:26323/cancel-booking/${booked._id}`,
-      {
-        method: "PATCH",
-        headers: {
-          auth: token,
-        },
+    const res = await fetch(`${serverUrl}/cancel-booking/${booked._id}`, {
+      method: "PATCH",
+      headers: {
+        auth: token,
       },
-    );
+    });
     if (res.ok) {
       redirect("/my-booked-session");
     }

@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { serverUrl } from "@/secret";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -18,7 +19,7 @@ export function ModalBooking({ name, slot, id, token }) {
     data.userId = user?.id;
     setLoading(true);
 
-    const res = await fetch(`http://localhost:26323/add-booking`, {
+    const res = await fetch(`${serverUrl}/add-booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
