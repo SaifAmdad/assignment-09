@@ -9,7 +9,9 @@ export const metadata = {
 };
 
 async function TutorsPage() {
-  const res = await fetch(`${serverUrl}/all-tutors`);
+  const res = await fetch(`${serverUrl}/all-tutors`, {
+    next: { revalidate: 60 },
+  });
   const { tutors, success } = await res.json();
 
   return (

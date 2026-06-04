@@ -6,7 +6,9 @@ import { serverUrl } from "@/secret";
 import NotFound from "./shared/NotFound";
 
 const AvailableTutors = async () => {
-  const res = await fetch(`${serverUrl}/all-tutors`);
+  const res = await fetch(`${serverUrl}/all-tutors`, {
+    next: { revalidate: 60 },
+  });
   const { tutors, success } = await res.json();
 
   return (
