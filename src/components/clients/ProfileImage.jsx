@@ -10,7 +10,7 @@ export default function AvatarClient({ url, height, width }) {
         alt="avatar"
         width={width}
         height={height}
-        className="h-9 w-9 border border-indigo-600 rounded-full p-1 ml-4"
+        className="h-9 w-9 border border-indigo-600 rounded-full ml-4"
       />
     );
   } else {

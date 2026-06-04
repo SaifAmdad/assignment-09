@@ -181,7 +181,7 @@ const AddTutor = ({ token }) => {
           <label className=" fieldset">
             <button
               type="submit"
-              className="btn bg-indigo-600 text-white mt-4 input w-full"
+              className="btn bg-indigo-600 text-white mt-4 input w-full cursor-pointer"
             >
               {loading ? (
                 <span className="loading loading-spinner loading-sm "></span>

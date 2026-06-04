@@ -30,7 +30,7 @@ const MySession = async ({ token }) => {
             <tbody>
               {/* row 1 */}
               {booking.map((booked, i) => (
-                <tr key={i}>
+                <tr key={booked._id}>
                   <td>
                     <div className="flex items-center gap-3">
                       <div>

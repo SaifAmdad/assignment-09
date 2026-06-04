@@ -26,7 +26,7 @@ const AvailableTutors = async () => {
             if (i >= 6) return;
             // i starts from 0
 
-            return <TutorCard data={data} key={i} />;
+            return <TutorCard data={data} key={data._id} />;
           })}
           {/* {tutors.length / 6 <1 } */}
         </div>

@@ -32,7 +32,7 @@ const MyTutors = async ({ token }) => {
             <tbody>
               {/* row 1 */}
               {tutors.map((tutor, i) => (
-                <tr key={i}>
+                <tr key={tutor._id}>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
