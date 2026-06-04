@@ -2,18 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
+import AvatarClient from "../clients/Avarter";
 
 const TutorCard = ({ data }) => {
   return (
     <div className="card bg-base-200 max-w-100 shadow-sm mx-auto sm:mx-0">
       <figure>
-        <Image
-          height={200}
-          width={200}
-          src={data.photoUrl}
-          alt="Shoes"
-          className=" w-auto rounded-xl h-60"
-        />
+        <AvatarClient url={data.photoUrl} width={200} height={200} />
       </figure>
       <div className="">
         <h2 className="card-title pt-2">{data.tutorName}</h2>

@@ -19,6 +19,16 @@ function Navbar() {
       </li>
     </>
   );
+
+  const altNav = (
+    <>
+      <li>
+        <button className="text-[16px] font-semibold btn-disabled bg-transparent opacity-50">
+          Add Tutor
+        </button>
+      </li>
+    </>
+  );
   const logedinNavlinks = (
     <>
       <li>
@@ -45,7 +55,7 @@ function Navbar() {
     </>
   );
   return (
-    <div className="bg-base-100 shadow-sm">
+    <div className="bg-base-100 shadow-sm sticky top-0 z-9999">
       <div className="navbar container lg:w-[75%] mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -71,8 +81,7 @@ function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {navlinks}
-              {user ? logedinNavlinks : ""}
-              {/* {logedinNavlinks} */}
+              {user ? logedinNavlinks : altNav}
             </ul>
           </div>
           <Link href={"/"} className="font-bold text-xl flex gap-0">
@@ -83,8 +92,7 @@ function Navbar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             {navlinks}
-            {user ? logedinNavlinks : ""}
-            {/* {logedinNavlinks} */}
+            {user ? logedinNavlinks : altNav}
           </ul>
         </div>
         <div className="navbar-end">

@@ -1,6 +1,5 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
 
 function Search() {
   const param = useSearchParams();

@@ -20,7 +20,7 @@ const MyTutorsPage = async () => {
           </p>
         </div>
         <Link href={"/add-tutor"} className="btn bg-indigo-600 text-white px-4">
-          <FaPlus /> Add New Tutor{" "}
+          <FaPlus /> Add New Tutor
         </Link>
       </div>
       <MyTutors token={token} />

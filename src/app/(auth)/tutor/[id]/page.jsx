@@ -1,3 +1,4 @@
+import AvatarClient from "@/components/clients/Avarter";
 import { ModalBooking } from "@/components/clients/ModalBooking";
 import { auth } from "@/lib/auth";
 import { serverUrl } from "@/secret";
@@ -39,18 +40,17 @@ const TutorDetailsPage = async ({ params }) => {
   const { tutor: data } = await res.json();
 
   return (
-    <div className="container mx-auto lg:w-[75%] sm:px-10 py-10 bg-base-200 my-10 shadow-sm rounded-2xl flex flex-col items-center">
-      <div className="w-full sm:w-xl flex flex-col justify-center items-center sm:items-start sm:justify-start sm:flex-row gap-10">
-        <Image
-          src={data.photoUrl}
-          alt="Profile"
-          height={300}
+    <div className="container mx-auto lg:w-[75%] sm:px-10 py-10 bg-base-200 my-10 shadow-sm rounded-2xl flex flex-col items-center px-10">
+      <div className=" w-full sm:w-xl flex flex-col justify-center items-center sm:items-start sm:justify-start sm:flex-row sm:gap-10">
+        <AvatarClient
+          url={data.photoUrl}
           width={200}
+          height={300}
           className="rounded-sm"
         />
-        <div className="flex flex-col text-center sm:text-left ">
+        <div className="flex flex-col text-center sm:text-left py-3 sm:mt-0 bg-base-100 sm:bg-transparent w-full">
           <h3 className="text-2xl font-bold">{data.tutorName}</h3>
-          <p className="text-indigo-500 pt-2">
+          <p className="text-indigo-500 sm:pt-2">
             {data.subject} <span className="text-gray-400">tutor</span>{" "}
           </p>
 
@@ -58,7 +58,7 @@ const TutorDetailsPage = async ({ params }) => {
             With <span className="font-semibold">{data.experience} years</span>{" "}
             of experiences
           </p>
-          <p className="text-indigo-600 text-xl font-bold flex justify-center sm:justify-start items-center py-2">
+          <p className="text-indigo-600 text-xl font-bold flex justify-center sm:justify-start items-center sm:py-2">
             <TbCurrencyTaka size={24} /> {data.feePerHour}{" "}
             <span className="text-xl font-normal text-gray-400 pl-1">
               {" "}
@@ -66,7 +66,7 @@ const TutorDetailsPage = async ({ params }) => {
             </span>
           </p>
 
-          <p className="pt-3">
+          <p className="sm:pt-3 hidden sm:inline-block">
             <span className="btn bg-indigo-200 mr-3 py-1 px-8 font-medium text-sm rounded-xl text-black">
               {data.teachingMode}
             </span>
@@ -81,6 +81,11 @@ const TutorDetailsPage = async ({ params }) => {
             <tr>
               <td className="font-bold">Subject</td>
               <td>{data.subject}</td>
+            </tr>
+            {/* row 1 */}
+            <tr>
+              <td className="font-bold">Teaching Mode</td>
+              <td>{data.teachingMode}</td>
             </tr>
             {/* row 2 */}
             <tr>

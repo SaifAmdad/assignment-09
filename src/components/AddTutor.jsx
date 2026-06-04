@@ -2,17 +2,19 @@
 
 import { authClient } from "@/lib/auth-client";
 import { serverUrl } from "@/secret";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 
 const AddTutor = ({ token }) => {
+  const [loading, setLoading] = useState(false);
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target.tutorName.value);
+    setLoading(true);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     data.userId = user.id;
-    console.log(data);
 
     const newTutor = await fetch(
       `https://assignment-09-server.onrender.com/add-tutor`,
@@ -27,8 +29,9 @@ const AddTutor = ({ token }) => {
       },
     );
     const res = await newTutor.json();
-    // todo
-    console.log(res);
+    if (res.success) {
+      redirect("/my-tutors");
+    }
   };
 
   return (
@@ -37,13 +40,13 @@ const AddTutor = ({ token }) => {
         onSubmit={onSubmit}
         className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4 md:px-10"
       >
-        <div className="flex flex-col sm:flex-row gap-10 ">
+        <div className="flex flex-col sm:flex-row sm:gap-10">
           <div className="w-full">
             <fieldset className="fieldset w-full">
               <label className="label">Tutor Name</label>
               <input
                 type="text"
-                className="input"
+                className="input w-full"
                 placeholder="Tutor Name"
                 required
                 name="tutorName"
@@ -54,8 +57,8 @@ const AddTutor = ({ token }) => {
               <span className="label">Photo Url</span>
               <input
                 type="text"
-                className="input "
-                placeholder="Photo url"
+                className="input w-full"
+                placeholder="Photo-Url (Ex: http.....)"
                 required
                 name="photoUrl"
               />
@@ -67,7 +70,7 @@ const AddTutor = ({ token }) => {
               <select
                 defaultValue="Select"
                 name="subject"
-                className="select items-center justify-center"
+                className="select items-center justify-center w-full"
               >
                 <option disabled={true}>Select </option>
                 <option value="Math">Math</option>
@@ -82,7 +85,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Available Date & Time slot</span>
               <input
                 type="text"
-                className="input "
+                className="input w-full"
                 placeholder="Example: Sun - Thu 5:00 PM - 8:00 PM "
                 required
                 name="availableDateTime"
@@ -93,7 +96,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Hourly fee</span>
               <input
                 type="number"
-                className="input "
+                className="input w-full"
                 placeholder="Fee/BDT"
                 required
                 name="feePerHour"
@@ -104,7 +107,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Total Slot</span>
               <input
                 type="number"
-                className="input "
+                className="input w-full"
                 placeholder="Slot"
                 required
                 name="totalSlot"
@@ -118,7 +121,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Session Start</span>
               <input
                 type="date"
-                className="input "
+                className="input w-full"
                 placeholder="Session"
                 required
                 name="sessionStart"
@@ -129,7 +132,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Institution</span>
               <input
                 type="text"
-                className="input "
+                className="input w-full"
                 placeholder="Institution"
                 required
                 name="institution"
@@ -141,7 +144,7 @@ const AddTutor = ({ token }) => {
               <input
                 type="number"
                 step="any"
-                className="input "
+                className="input w-full"
                 placeholder="ex: 0.5, 1.4"
                 required
                 name="experience"
@@ -152,7 +155,7 @@ const AddTutor = ({ token }) => {
               <span className="label">Location</span>
               <input
                 type="text"
-                className="input "
+                className="input w-full"
                 placeholder="Location"
                 required
                 name="location"
@@ -164,7 +167,7 @@ const AddTutor = ({ token }) => {
               <select
                 defaultValue="Select"
                 name="teachingMode"
-                className="select items-center justify-center"
+                className="select items-center justify-center w-full"
               >
                 <option disabled={true}>Select </option>
                 <option value="Online">Online</option>
@@ -174,9 +177,20 @@ const AddTutor = ({ token }) => {
             </label>
           </div>
         </div>
-        <button className="btn bg-indigo-600 text-white mt-4" type="submit">
-          Add Tutor
-        </button>
+        <div className="w-full">
+          <label className=" fieldset">
+            <button
+              type="submit"
+              className="btn bg-indigo-600 text-white mt-4 input w-full"
+            >
+              {loading ? (
+                <span className="loading loading-spinner loading-sm "></span>
+              ) : (
+                "Add Tutor"
+              )}
+            </button>
+          </label>
+        </div>
       </form>
     </>
   );

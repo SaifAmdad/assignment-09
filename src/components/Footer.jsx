@@ -10,7 +10,7 @@ const Footer = () => {
     <div className="bg-slate-900 py-12">
       <div className="container mx-auto lg:w-[75%] flex flex-col justify-center lg:flex-row lg:justify-between ">
         {/* left footer */}
-        <div className="max-w-62.5 py-5 lg:py-1">
+        <div className="max-w-62.5 py-5 lg:py-1 mx-auto lg:mx-0">
           <Link
             href={"/"}
             className=" font-bold text-[16px] flex gap-0 text-white justify-center lg:justify-start"
@@ -25,7 +25,7 @@ const Footer = () => {
         </div>
 
         {/* middle footer */}
-        <div className="flex flex-col sm:flex-row gap-10 py-5 lg:py-1 ">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 py-5 lg:py-1 mx-auto justify-around">
           <div>
             <h3 className="text-[16px] text-white font-semibold">
               Quick Links
@@ -61,7 +61,7 @@ const Footer = () => {
         </div>
 
         {/* right footer */}
-        <div className="py-5 lg:py-1">
+        <div className="py-5 lg:py-1 mx-auto">
           <h3 className="text-[16px] text-white font-semibold">Social Links</h3>
           <div className="flex gap-3 py-3">
             <FaFacebook fill="blue" size={25} />

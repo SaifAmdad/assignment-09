@@ -1,11 +1,11 @@
-import { auth } from "@/lib/auth";
 import { serverUrl } from "@/secret";
-import { headers } from "next/headers";
 import Image from "next/image";
 import React from "react";
 import { BiDetail } from "react-icons/bi";
-import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import UpdateTutor from "./clients/UpdateTutor";
+import DeleteTutor from "./clients/DeleteTutor";
+import Link from "next/link";
 
 const MyTutors = async ({ token }) => {
   const res = await fetch(`${serverUrl}/my-tutors`, {
@@ -23,9 +23,9 @@ const MyTutors = async ({ token }) => {
           <table className="table">
             <thead>
               <tr className="font-bold text-[16px] py-5">
-                <th>Tutor</th>
+                <th>Tutor Name</th>
                 <th>Subject</th>
-                <th>Available Slot</th>
+                <th className="text-center">Available Slot</th>
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -53,12 +53,17 @@ const MyTutors = async ({ token }) => {
                     </div>
                   </td>
                   <td>{tutor.subject}</td>
-                  <td>{tutor.totalSlot - tutor.bookedSlot}</td>
+                  <td className="text-center">
+                    {tutor.totalSlot - tutor.bookedSlot}
+                  </td>
                   <th>
-                    <div className="flex gap-3 justify-center">
-                      <BiDetail color="#6366F1" size={22} />
-                      <FiEdit color="green" size={20} />
-                      <RiDeleteBin6Line color="red" size={20} />
+                    <div className="flex items-center justify-center">
+                      <Link href={`/tutor/${tutor._id}`}>
+                        <BiDetail color="#6366F1" size={22} />
+                      </Link>
+
+                      <UpdateTutor tutor={tutor} token={token} />
+                      <DeleteTutor tutor={tutor} token={token} />
                     </div>
                   </th>
                 </tr>
