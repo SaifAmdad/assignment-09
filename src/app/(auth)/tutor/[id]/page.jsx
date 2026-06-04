@@ -3,27 +3,34 @@ import { ModalBooking } from "@/components/clients/ModalBooking";
 import { auth } from "@/lib/auth";
 import { serverUrl } from "@/secret";
 import { headers } from "next/headers";
-import Image from "next/image";
-import React from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 
-// export async function generateMetadata({ params }, parent) {
-//   // read route params
-//   const { id } = await params;
+export async function generateMetadata({ params }, parent) {
+  const h = new Headers(await headers());
+  const { token } = await auth.api.getToken({
+    headers: h,
+  });
+  const { id } = await params;
 
-//   // fetch data
-//   const product = await fetch(`https://.../${id}`).then((res) => res.json());
+  // fetch data
+  const res = await fetch(`${serverUrl}/get-tutor/${id}`, {
+    method: "GET",
+    headers: {
+      auth: token,
+    },
+  });
+  const { tutor, success } = await res.json();
+  if (!success) {
+    return {
+      title: "Tutor Not Found",
+    };
+  }
 
-//   // optionally access and extend (rather than replace) parent metadata
-//   const previousImages = (await parent).openGraph?.images || [];
-
-//   return {
-//     title: product.title,
-//     openGraph: {
-//       images: ["/some-specific-page-image.jpg", ...previousImages],
-//     },
-//   };
-// }
+  return {
+    title: tutor.tutorName,
+    description: tutor.subject,
+  };
+}
 
 const TutorDetailsPage = async ({ params }) => {
   const h = new Headers(await headers());

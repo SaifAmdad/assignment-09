@@ -12,11 +12,11 @@ const MySession = async ({ token }) => {
   if (!booking) {
     return console.log("Nothing");
   }
-  console.log(booking);
+
   return (
     <div>
       <div className="overflow-x-auto bg-base-200">
-        {booking.length > 0 ? (
+        {booking.length > 0 && booking ? (
           <table className="table">
             <thead>
               <tr className="font-bold text-[16px] py-5">

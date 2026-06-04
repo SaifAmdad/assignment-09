@@ -5,6 +5,7 @@ import Link from "next/link";
 import ThemeButton from "./clients/ThemeButton";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
+import AvatarClient from "./clients/ProfileImage";
 function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -99,12 +100,18 @@ function Navbar() {
           <ThemeButton />
 
           {user ? (
-            <Image
-              src={user.image}
+            // <Image
+            //   src={user.image}
+            //   height={100}
+            //   width={100}
+            //   alt="Profile"
+            //   className="ml-3 h-10 w-10 rounded-full"
+            // />
+            <AvatarClient
+              url={user.image}
               height={100}
               width={100}
-              alt="Profile"
-              className="ml-3 h-10 w-10 rounded-full"
+              className=" h-10 w-10"
             />
           ) : (
             <Link

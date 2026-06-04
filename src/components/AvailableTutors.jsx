@@ -7,9 +7,7 @@ import NotFound from "./shared/NotFound";
 
 const AvailableTutors = async () => {
   const res = await fetch(`${serverUrl}/all-tutors`);
-  const tutors = await res.json();
-
-  console.log(tutors);
+  const { tutors, success } = await res.json();
 
   return (
     <div className="container mx-auto lg:w-[75%] py-16">
@@ -22,7 +20,7 @@ const AvailableTutors = async () => {
           View All <IoIosArrowForward />
         </Link>
       </div>
-      {tutors.success ? (
+      {success ? (
         <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-stretch">
           {tutors.map((data, i) => {
             if (i >= 6) return;

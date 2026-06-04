@@ -13,11 +13,11 @@ function RegisterPage() {
       email: e.target.email.value, // required
       password: e.target.password.value, // required
       image: e.target.image.value,
-      // callbackURL: "/",
+      callbackURL: "/",
     });
-
     console.log(data, error);
   };
+
   return (
     <div className="container mx-auto sm:w-100 sm:min-h-[60vh] py-10 ">
       <div className="bg-base-200 border-base-100">

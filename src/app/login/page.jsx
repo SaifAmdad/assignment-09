@@ -3,8 +3,13 @@ import SigninGoogle from "@/components/clients/SigninGoogle";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -12,10 +17,16 @@ function LoginPage() {
       email: e.target.email.value, // required
       password: e.target.password.value, // required
       rememberMe: true,
-      // callbackURL: "https://example.com/callback",
     });
 
-    console.log(data, error);
+    if (data) {
+      // SECURITY CHECK
+      if (redirectTo.startsWith("/")) {
+        router.replace(redirectTo);
+      } else {
+        router.replace("/");
+      }
+    }
   };
   return (
     <div className="container mx-auto sm:w-100 sm:min-h-[60vh] py-10 ">
