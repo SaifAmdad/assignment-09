@@ -1,9 +1,9 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import { serverUrl } from "@/secret";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 const AddTutor = ({ token }) => {
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,30 @@ const AddTutor = ({ token }) => {
     );
     const res = await newTutor.json();
     if (res.success) {
+      toast.success("New Tutor added successfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       redirect("/my-tutors");
+    } else {
+      toast.error("Something went wrong", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
 

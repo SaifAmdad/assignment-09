@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 
 export const metadata = {
   title: "Add new Tutor | TutorHub",
-  description: "Route not found",
+  description: "Create a new tutor profile",
 };
 
 const AddTutorPage = async () => {

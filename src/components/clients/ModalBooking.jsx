@@ -6,6 +6,7 @@ import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import { BsBookmarkCheck } from "react-icons/bs";
+import { Bounce, toast } from "react-toastify";
 
 export function ModalBooking({ name, slot, id, token }) {
   const { data: session } = authClient.useSession();
@@ -28,6 +29,17 @@ export function ModalBooking({ name, slot, id, token }) {
       body: JSON.stringify(data),
     });
     if (res.ok) {
+      toast.success(`Session booked Seccessfully with ${name}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       redirect("/my-booked-session");
     }
   };

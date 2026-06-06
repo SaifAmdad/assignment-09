@@ -4,6 +4,7 @@ import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
+import { Bounce, toast } from "react-toastify";
 
 const CancelBooking = ({ booked, token }) => {
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,17 @@ const CancelBooking = ({ booked, token }) => {
       },
     });
     if (res.ok) {
+      toast.success("Booking cancelled successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       redirect("/my-booked-session");
     }
   };

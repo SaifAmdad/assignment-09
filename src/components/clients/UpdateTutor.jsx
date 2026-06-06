@@ -1,9 +1,10 @@
 "use client";
 
 import { serverUrl } from "@/secret";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useState } from "react";
 import { FiEdit } from "react-icons/fi";
+import { Bounce, toast } from "react-toastify";
 
 const UpdateTutor = ({ tutor, token }) => {
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,17 @@ const UpdateTutor = ({ tutor, token }) => {
 
     if (res.ok) {
       setLoading(false);
+      toast.success(`${tutor.tutorName} has been updated`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       document.getElementById(`modal_${tutor._id}`).close();
       redirect("/my-tutors");
     }

@@ -12,14 +12,17 @@ const MyTutorsPage = async () => {
   });
   return (
     <div className="container mx-auto md:w-[75%] pb-10 ">
-      <div className="py-6 flex justify-between items-center">
-        <div>
+      <div className="py-6 flex flex-col sm:flex-row justify-between items-center">
+        <div className="text-center sm:text-left">
           <h1 className="font-bold text-2xl py-2"> My Tutors</h1>
           <p className="text-base opacity-70">
             Manage your created tutor profile
           </p>
         </div>
-        <Link href={"/add-tutor"} className="btn bg-indigo-600 text-white px-4">
+        <Link
+          href={"/add-tutor"}
+          className="btn bg-indigo-600 text-white px-4 w-[80%] sm:w-auto my-5"
+        >
           <FaPlus /> Add New Tutor
         </Link>
       </div>

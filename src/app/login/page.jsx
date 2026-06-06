@@ -4,6 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
 
 function LoginPage() {
   const router = useRouter();
@@ -20,12 +21,36 @@ function LoginPage() {
     });
 
     if (data) {
+      toast.success("User Loged-in Successfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       // SECURITY CHECK
       if (redirectTo.startsWith("/")) {
         router.replace(redirectTo);
       } else {
         router.replace("/");
       }
+    }
+    if (error) {
+      toast.error(`${error.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
   return (

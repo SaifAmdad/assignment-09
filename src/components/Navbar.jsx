@@ -4,11 +4,50 @@ import Navlink from "./shared/Navlink";
 import Link from "next/link";
 import ThemeButton from "./clients/ThemeButton";
 import { authClient } from "@/lib/auth-client";
-import Image from "next/image";
 import AvatarClient from "./clients/ProfileImage";
+import { PiSignOutBold } from "react-icons/pi";
+import { Bounce, toast } from "react-toastify";
+import { redirect } from "next/navigation";
 function Navbar() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+
+  const signOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Signed Out Successfully", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+          redirect("/login");
+        },
+      },
+    });
+  };
+
+  const errorTosat = () => {
+    if (!user) {
+      toast.error("Login required !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
 
   const navlinks = (
     <>
@@ -23,30 +62,49 @@ function Navbar() {
 
   const altNav = (
     <>
-      <li>
-        <button className="text-[16px] font-semibold btn-disabled bg-transparent opacity-50">
+      <li onClick={errorTosat}>
+        <Link
+          href={"/login"}
+          className="text-[16px] font-semibold btn-disabled bg-transparent opacity-50"
+        >
           Add Tutor
-        </button>
+        </Link>
+      </li>
+      <li onClick={errorTosat}>
+        <Link
+          href={"/login"}
+          className="text-[16px] font-semibold btn-disabled bg-transparent opacity-50"
+        >
+          My Tutors
+        </Link>
+      </li>
+      <li onClick={errorTosat}>
+        <Link
+          href={"/login"}
+          className="text-[16px] font-semibold btn-disabled bg-transparent opacity-50"
+        >
+          My Booked Session
+        </Link>
       </li>
     </>
   );
   const logedinNavlinks = (
     <>
-      <li>
+      <li onClick={errorTosat}>
         <Navlink
           href={"/add-tutor"}
           route={"Add Tutor"}
           logedin={`${user ? true : false}`}
         />
       </li>
-      <li>
+      <li onClick={errorTosat}>
         <Navlink
           href={"/my-tutors"}
           route={"My Tutors"}
           logedin={`${user ? true : false}`}
         />
       </li>
-      <li>
+      <li onClick={errorTosat}>
         <Navlink
           href={"/my-booked-session"}
           route={"My Booked Session"}
@@ -100,19 +158,38 @@ function Navbar() {
           <ThemeButton />
 
           {user ? (
-            // <Image
-            //   src={user.image}
-            //   height={100}
-            //   width={100}
-            //   alt="Profile"
-            //   className="ml-3 h-10 w-10 rounded-full"
-            // />
-            <AvatarClient
-              url={user.image}
-              height={100}
-              width={100}
-              className=" h-10 w-10"
-            />
+            <>
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className=" m-1">
+                  <AvatarClient
+                    url={user.image}
+                    height={100}
+                    width={100}
+                    className=" h-10 w-10"
+                  />
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+                >
+                  <li>
+                    <Link href={"/my-tutors"}>MY TUTORS</Link>
+                  </li>
+                  <li>
+                    <Link href={"/my-booked-session"}>MY SESSIONS</Link>
+                  </li>
+
+                  <li>
+                    <button
+                      className="text-red-500 font-semibold"
+                      onClick={signOut}
+                    >
+                      Sign Out <PiSignOutBold />
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </>
           ) : (
             <Link
               href={"/login"}

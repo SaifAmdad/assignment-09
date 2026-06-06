@@ -3,7 +3,9 @@
 import SigninGoogle from "@/components/clients/SigninGoogle";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
+import { Bounce, toast } from "react-toastify";
 
 function RegisterPage() {
   const onSubmit = async (e) => {
@@ -15,7 +17,35 @@ function RegisterPage() {
       image: e.target.image.value,
       callbackURL: "/",
     });
-    console.log(data, error);
+
+    if (data) {
+      toast.success("User Registered Successfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      redirect("/");
+    }
+
+    if (error) {
+      toast.error(`${error.message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
   };
 
   return (

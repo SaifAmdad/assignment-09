@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import AvatarClient from "../clients/Avarter";
+import ButtonPrivetRoute from "../clients/ButtonPrivetRoute";
 
-const TutorCard = ({ data }) => {
+const TutorCard = async ({ data }) => {
   return (
     <div className="card bg-base-200 max-w-100 shadow-sm mx-auto sm:mx-0">
       <figure>
@@ -24,7 +24,7 @@ const TutorCard = ({ data }) => {
             href={`/tutor/${data._id}`}
             className="btn bg-indigo-600 text-white w-full"
           >
-            Book Session
+            <ButtonPrivetRoute btnText={"Book Session"} />
           </Link>
         </div>
       </div>

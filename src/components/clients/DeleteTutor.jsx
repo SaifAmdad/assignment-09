@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AlertDialog, Button, Card, Link } from "@heroui/react";
+import { Bounce, toast } from "react-toastify";
 
 const DeleteTutor = ({ tutor, token }) => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,17 @@ const DeleteTutor = ({ tutor, token }) => {
 
     if (success) {
       setLoading(false);
+      toast.success("Tutor deleted Successfully !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
       document.getElementById(`delete_modal_${tutor._id}`).close();
       redirect("/my-tutors");
     }
