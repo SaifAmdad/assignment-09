@@ -2,18 +2,19 @@
 import SigninGoogle from "@/components/clients/SigninGoogle";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Bounce, toast } from "react-toastify";
 
 function LoginPage() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/";
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const { data, error } = await authClient.signIn.email({
       email: e.target.email.value, // required
       password: e.target.password.value, // required
@@ -21,6 +22,8 @@ function LoginPage() {
     });
 
     if (data) {
+      setLoading(false);
+
       toast.success("User Loged-in Successfully !", {
         position: "top-right",
         autoClose: 3000,
@@ -40,6 +43,8 @@ function LoginPage() {
       }
     }
     if (error) {
+      setLoading(false);
+
       toast.error(`${error.message}`, {
         position: "top-right",
         autoClose: 3000,
@@ -87,7 +92,13 @@ function LoginPage() {
               placeholder="Password"
             />
 
-            <button className="btn bg-indigo-600 text-white mt-4">Login</button>
+            <button className="btn bg-indigo-600 text-white mt-4">
+              {loading ? (
+                <span className="loading loading-spinner loading-sm "></span>
+              ) : (
+                "Login"
+              )}
+            </button>
 
             <p className="text-sm ">
               <span className=" opacity-75">If you are new, </span>

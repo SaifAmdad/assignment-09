@@ -4,12 +4,16 @@ import SigninGoogle from "@/components/clients/SigninGoogle";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
 function RegisterPage() {
+  const [loading, setLoading] = useState(false);
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const { data, error } = await authClient.signUp.email({
       name: e.target.name.value, // required
       email: e.target.email.value, // required
@@ -19,6 +23,8 @@ function RegisterPage() {
     });
 
     if (data) {
+      setLoading(false);
+
       toast.success("User Registered Successfully !", {
         position: "top-right",
         autoClose: 3000,
@@ -34,6 +40,8 @@ function RegisterPage() {
     }
 
     if (error) {
+      setLoading(false);
+
       toast.error(`${error.message}`, {
         position: "top-right",
         autoClose: 3000,
@@ -99,7 +107,11 @@ function RegisterPage() {
             />
 
             <button className="btn bg-indigo-600 text-white mt-4">
-              Register
+              {loading ? (
+                <span className="loading loading-spinner loading-sm "></span>
+              ) : (
+                "Register"
+              )}
             </button>
             <p className="text-sm ">
               <span className=" opacity-75">
